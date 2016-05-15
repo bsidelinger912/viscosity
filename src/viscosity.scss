@@ -1,0 +1,25 @@
+/**
+ * @file Viscosity
+ * @description a sass library for fluid transitions beetween aspect ratios
+ * @author Ben Sidelinger
+ */
+
+@import "./mixins.scss";
+@import "./functions.scss";
+
+@mixin viscosity($breakList) {
+  $allBreakPoints: addBreakWidths($breakList);
+
+  @each $break in $allBreakPoints {
+    // we'll create a media query for each set of points
+    @include media(map-get($break, minWidth), map-get($break, maxWidth)) {
+      // if we have a fixed height, that's all we need as we transition between aspect ratios
+      @if (map-get($break, fixedHeight)) {
+        height: map-get($break, fixedHeight);
+      } @else {
+        // otherwise we're on an aspect ratio
+        @include aspectRatio(map-get($break, aspectWidth), map-get($break, aspectHeight));
+      }
+    }
+  }
+}

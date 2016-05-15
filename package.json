@@ -1,0 +1,31 @@
+{
+  "name": "viscosity",
+  "version": "0.1.0",
+  "description": "A sass library for fluid containers that handle aspect ratios across device sizes",
+  "main": "index.js",
+  "scripts": {
+    "build": "node_modules/webpack/bin/webpack.js --colors --display-error-details --config examples/webpack.config.js"
+  },
+  "author": "Ben Sidelinger",
+  "license": "MIT",
+  "dependencies": {
+    "susy": "^2.2.12"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-eslint": "^6.0.4",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.10.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.1.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.7.0",
+    "postcss-loader": "^0.9.1",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

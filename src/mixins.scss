@@ -1,0 +1,36 @@
+/**
+ * @file some mixins used in viscosity and exposed with the lib
+ */
+
+@mixin media($min, $max) {
+    @if $max == 0 {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else if $min == 0 {
+        @media (max-width: $max) {
+            @content;
+        }
+    } @else {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+}
+
+@mixin aspectRatio($width, $height) {
+    position: relative;
+    &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

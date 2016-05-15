@@ -1,0 +1,43 @@
+/**
+ * @file functions used by viscosity and exposed with lib
+ */
+
+@function addBreakWidths($breakList) {
+  $currentStart: 0;
+  $result: ();
+
+  @for $i from 1 through length($breakList) {
+    $object: nth($breakList, $i);
+
+    // break boundaries
+    // TODO: allow for passing media querie boundaries in explicitly
+    $padding: if(type-of(map-get($object, leftRightPadding)) == number, map-get($object, leftRightPadding), 0);
+    $minWidth: if($i == 1, 0, ($currentStart + $padding) + px);
+    $maxWidthNumber: round(map-get($object, maxHeight) * (map-get($object, aspectWidth) / map-get($object, aspectHeight)));
+    $maxWidth: if($i == length($breakList), 0, ($maxWidthNumber + $padding) + px);
+
+    $newObject: map-merge($object, (minWidth: $minWidth, maxWidth: $maxWidth));
+
+    // add the break points to the object
+    $result: append($result, $newObject);
+
+    // increment by 1px to avoid overlap in the breakpoints
+    $currentStart: $maxWidthNumber + 1;
+
+    // if it's not the last aspect ratio, we need a transition zone with a fixed height
+    @if ($i != length($breakList)) {
+      $nextObject: nth($breakList, $i + 1);
+      $maxWidthNumber: round(map-get($object, maxHeight) * (map-get($nextObject, aspectWidth) / map-get($nextObject, aspectHeight)));
+
+      $newObject: (minWidth: ($currentStart + $padding) + px, maxWidth: ($maxWidthNumber + $padding) + px, fixedHeight: map-get($object, maxHeight) + px);
+
+      // add the break points to the object
+      $result: append($result, $newObject);
+
+      // we need to increment again now
+      $currentStart: $maxWidthNumber + 1;
+    }
+  }
+
+  @return $result;
+}

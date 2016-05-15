@@ -1,0 +1,36 @@
+@import "../src/viscosity.scss";
+
+$breakList1: (
+  (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 16),
+  (aspectWidth: 3, aspectHeight: 2, maxHeight: 600, leftRightPadding: 16),
+  (aspectWidth: 16, aspectHeight: 9, maxHeight: 0, leftRightPadding: 16),
+);
+
+$breakList2: (
+  (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 116),
+  (aspectWidth: 16, aspectHeight: 9, maxHeight: 600, leftRightPadding: 116),
+  (aspectWidth: 5, aspectHeight: 2, maxHeight: 0, leftRightPadding: 116),
+);
+
+.viscous {
+  background-color: #ddd;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  >div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.viscous1 {
+  @include viscosity($breakList1);
+}
+
+.viscous2 {
+  @include viscosity($breakList2);
+  margin: 50px;
+}
