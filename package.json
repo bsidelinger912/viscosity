@@ -12,9 +12,7 @@
   },
   "author": "Ben Sidelinger",
   "license": "MIT",
-  "dependencies": {
-    "susy": "^2.2.12"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-eslint": "^6.0.4",
