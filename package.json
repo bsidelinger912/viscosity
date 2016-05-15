@@ -2,7 +2,11 @@
   "name": "viscosity",
   "version": "0.1.0",
   "description": "A sass library for fluid containers that handle aspect ratios across device sizes",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bsidelinger912/viscosity.git"
+  },
+  "main": "src/viscosity.scss",
   "scripts": {
     "build": "node_modules/webpack/bin/webpack.js --colors --display-error-details --config examples/webpack.config.js"
   },

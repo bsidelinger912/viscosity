@@ -75,4 +75,4 @@ $allBreakPoints: addBreakWidths($breakList1);
 }
 ```
 
-See the examples folder for more usage demonstration. 
+See the examples folder for more usage demonstration.
