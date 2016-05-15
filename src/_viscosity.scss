@@ -4,8 +4,8 @@
  * @author Ben Sidelinger
  */
 
-@import "./mixins.scss";
-@import "./functions.scss";
+@import "./mixins";
+@import "./functions";
 
 @mixin viscosity($breakList) {
   $allBreakPoints: addBreakWidths($breakList);

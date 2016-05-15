@@ -1,4 +1,4 @@
-@import "../src/viscosity.scss";
+@import "../src/viscosity";
 
 $breakList1: (
   (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 16),
@@ -7,8 +7,8 @@ $breakList1: (
 );
 
 $breakList2: (
-  (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 116),
-  (aspectWidth: 16, aspectHeight: 9, maxHeight: 600, leftRightPadding: 116),
+  (aspectWidth: 1, aspectHeight: 1, maxHeight: 200, leftRightPadding: 116),
+  (aspectWidth: 16, aspectHeight: 9, maxHeight: 400, leftRightPadding: 116),
   (aspectWidth: 5, aspectHeight: 2, maxHeight: 0, leftRightPadding: 116),
 );
 
