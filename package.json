@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/bsidelinger912/viscosity.git"
   },
-  "main": "src/viscosity.scss",
+  "main": "src/_viscosity.scss",
   "scripts": {
     "build": "node_modules/webpack/bin/webpack.js --colors --display-error-details --config examples/webpack.config.js"
   },

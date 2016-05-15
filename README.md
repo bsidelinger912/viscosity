@@ -2,11 +2,18 @@
 
 A lightweight sass library for creating fluid layouts driven by aspect ratios that evolve as the window widens. In a situation like a hero image at the top of a page, often you want something like a 1x1 aspect ratio on phones, but want something like a 16x9 ratio on desktop.  Transitioning fluidly between these points can create nasty height changes that push content lower in the page around. Viscosity generates smooth transitions between aspect ratios by calculating the correct break points to make the transitions without jumping the height around.
 
+##Getting Started
+These instructions assume you already have node and npm installed, and a sass build set up.
+
+1. Install with npm `npm install --save viscosity`
+2. Import into your sass files `@import "~viscosity/src/viscosity";`
+
 ##Usage
 
 Viscosity is used with a list of maps that define the ratios you want to hit.
+
 ```
-@import "../src/viscosity.scss";
+@import "~viscosity/src/viscosity";
 
 $breakList1: (
   (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 16),
@@ -40,7 +47,7 @@ A couple other mixins are available too
 Viscosity also comes with a handy function that gives you access to the raw break point data.  This allows you to use the breakpoints to add custom style rules as your element transitions.
 
 ```
-@import "../src/viscosity.scss";
+@import "~viscosity/src/viscosity";
 
 $breakList1: (
   (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 16),
