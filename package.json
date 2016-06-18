@@ -2,6 +2,17 @@
   "name": "viscosity",
   "version": "0.2.1",
   "description": "A sass library for fluid containers that handle aspect ratios across device sizes",
+  "author": "Ben Sidelinger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bsidelinger912/viscosity/issues"
+  },
+  "homepage": "https://github.com/bsidelinger912/viscosity#readme",
+  "keywords": [
+    "scss",
+    "sass",
+    "aspect ratio",
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/bsidelinger912/viscosity.git"
@@ -10,8 +21,6 @@
   "scripts": {
     "build": "node_modules/webpack/bin/webpack.js --colors --display-error-details --config examples/webpack.config.js"
   },
-  "author": "Ben Sidelinger",
-  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.3.6",
