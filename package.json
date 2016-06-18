@@ -1,6 +1,6 @@
 {
   "name": "viscosity",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A sass library for fluid containers that handle aspect ratios across device sizes",
   "repository": {
     "type": "git",
