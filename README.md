@@ -2,20 +2,9 @@
 
 A lightweight sass library for creating fluid layouts driven by aspect ratios that evolve as the window widens. In a situation like a hero image at the top of a page, often you want something like a 1x1 aspect ratio on phones, but want something like a 16x9 ratio on desktop.  Transitioning fluidly between these points can create nasty height changes that push content lower in the page around. Viscosity generates smooth transitions between aspect ratios by calculating the correct break points to make the transitions without jumping the height around.
 
-<style>
-  .demo {
-    border: 1px solid black;
-    background-color: #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-  }
-</style>
+Here's an example of what a transition between 1x1, 3x2, and 16x9 aspect ratios looks like (the animation plays five times):
 
-<div class="demo">
-  content
-</div>
+![viscosity transition example](examples/image_demo/rectangle.gif)
 
 ##Getting Started
 These instructions assume you already have node and npm installed, and a sass build set up.
