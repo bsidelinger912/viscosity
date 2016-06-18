@@ -1,16 +1,21 @@
 @import "../src/viscosity";
 
 $breakList1: (
-  (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 16),
-  (aspectWidth: 3, aspectHeight: 2, maxHeight: 600, leftRightPadding: 16),
-  (aspectWidth: 16, aspectHeight: 9, maxHeight: 0, leftRightPadding: 16),
+  (aspectWidth: 1, aspectHeight: 1, maxHeight: 400, leftRightPadding: 0),
+  (aspectWidth: 3, aspectHeight: 2, maxHeight: 600, leftRightPadding: 0),
+  (aspectWidth: 16, aspectHeight: 9, maxHeight: 0, leftRightPadding: 0),
 );
 
 $breakList2: (
-  (aspectWidth: 1, aspectHeight: 1, maxHeight: 200, leftRightPadding: 116),
-  (aspectWidth: 16, aspectHeight: 9, maxHeight: 400, leftRightPadding: 116),
-  (aspectWidth: 5, aspectHeight: 2, maxHeight: 0, leftRightPadding: 116),
+  (aspectWidth: 1, aspectHeight: 1, maxHeight: 200, leftRightPadding: 100),
+  (aspectWidth: 16, aspectHeight: 9, maxHeight: 400, leftRightPadding: 100),
+  (aspectWidth: 5, aspectHeight: 2, maxHeight: 0, leftRightPadding: 100),
 );
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
 
 .viscous {
   background-color: #ddd;
