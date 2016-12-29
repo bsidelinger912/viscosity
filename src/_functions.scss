@@ -2,41 +2,80 @@
  * @file functions used by viscosity and exposed with lib
  */
 
+// if they define a max width, just use that, otherwise calculate with max height
+@function getMaxWidth($object, $padding) {
+   @if map-has-key($object, maxWidth) {
+      @return map-get($object, maxWidth);
+   } @else {
+      @return round(map-get($object, maxHeight) * (map-get($object, aspectWidth) / map-get($object, aspectHeight))) + $padding;
+   }
+}
+
+@function getMaxWidth2($object, $nextObject, $padding, $currentStart, $i) {
+   @if map-has-key($object, maxWidth) {
+      // don't add a max width if the next break is over our current start and we're on the last one
+      @if (($i + 1) == length($breakList) and $currentStart > map-get($nextObject, maxWidth)) {
+          @return 0;
+      } @else {
+          // at the next aspect ratio, what width would correlate with this height?
+          @return round(getMaxHeight($object, $padding) * (map-get($nextObject, aspectWidth) / map-get($nextObject, aspectHeight)));
+      }
+   } @else {
+      @return round(map-get($object, maxHeight) * (map-get($nextObject, aspectWidth) / map-get($nextObject, aspectHeight))) + $padding;
+   }
+}
+
+@function getMaxHeight($object, $padding) {
+   @if map-has-key($object, maxHeight) {
+      @return map-get($object, maxHeight);
+   } @else {
+      @return round(map-get($object, maxWidth) * (map-get($object, aspectHeight) / map-get($object, aspectWidth))) - $padding;
+   }
+}
+
 @function addBreakWidths($breakList) {
   $currentStart: 0;
   $result: ();
 
   @for $i from 1 through length($breakList) {
-    $object: nth($breakList, $i);
+    // skip if we put current start as -1
+    @if $currentStart > -1 {
+        $object: nth($breakList, $i);
 
-    // break boundaries
-    // TODO: allow for passing media querie boundaries in explicitly
-    $padding: if(type-of(map-get($object, leftRightPadding)) == number, map-get($object, leftRightPadding), 0);
-    $minWidth: if($i == 1, 0, ($currentStart + $padding) + px);
-    $maxWidthNumber: round(map-get($object, maxHeight) * (map-get($object, aspectWidth) / map-get($object, aspectHeight)));
-    $maxWidth: if($i == length($breakList), 0, ($maxWidthNumber + $padding) + px);
+        @if map-has-key($object, maxWidth) and $currentStart > map-get($object, maxWidth) {
+            // if the next one has a max width that's higher than we are now, just skip it
+        } @else {
+            // break boundaries
+            $padding: if(type-of(map-get($object, leftRightPadding)) == number, map-get($object, leftRightPadding), 0);
+            $minWidth: if($i == 1, 0, $currentStart + px);
+            $maxWidthNumber: getMaxWidth($object, $padding); // round(map-get($object, maxHeight) * (map-get($object, aspectWidth) / map-get($object, aspectHeight)));
+            $maxWidth: if($i == length($breakList), 0, $maxWidthNumber + px);
 
-    $newObject: map-merge($object, (minWidth: $minWidth, maxWidth: $maxWidth));
+            $newObject: map-merge($object, (minWidth: $minWidth, maxWidth: $maxWidth));
 
-    // add the break points to the object
-    $result: append($result, $newObject);
+            // add the break points to the object
+            $result: append($result, $newObject);
 
-    // increment by 1px to avoid overlap in the breakpoints
-    $currentStart: $maxWidthNumber + 1;
+            // increment by 1px to avoid overlap in the breakpoints
+            $currentStart: $maxWidthNumber + 1;
 
-    // if it's not the last aspect ratio, we need a transition zone with a fixed height
-    @if ($i != length($breakList)) {
-      $nextObject: nth($breakList, $i + 1);
-      $maxWidthNumber: round(map-get($object, maxHeight) * (map-get($nextObject, aspectWidth) / map-get($nextObject, aspectHeight)));
+            // if it's not the last aspect ratio, we need a transition zone with a fixed height
+            @if ($i != length($breakList)) {
+              $nextObject: nth($breakList, $i + 1);
+              $maxWidthNumber: getMaxWidth2($object, $nextObject, $padding, $currentStart, $i); // round(map-get($object, maxHeight) * (map-get($nextObject, aspectWidth) / map-get($nextObject, aspectHeight)));
 
-      $newObject: (minWidth: ($currentStart + $padding) + px, maxWidth: ($maxWidthNumber + $padding) + px, fixedHeight: map-get($object, maxHeight) + px);
+              $maxWidth: if($maxWidthNumber == 0, 0, $maxWidthNumber + px);
 
-      // add the break points to the object
-      $result: append($result, $newObject);
+              $newObject: (minWidth: $currentStart + px, maxWidth: $maxWidth, fixedHeight: getMaxHeight($object, $padding) + px);
 
-      // we need to increment again now
-      $currentStart: $maxWidthNumber + 1;
-    }
+              // add the break points to the object
+              $result: append($result, $newObject);
+
+              // we need to increment again now
+              $currentStart: if($maxWidthNumber == 0, -1, $maxWidthNumber + 1);
+            }
+        }
+     }
   }
 
   @return $result;
